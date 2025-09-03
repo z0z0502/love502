@@ -15,13 +15,13 @@
         }
         
         body {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            background: linear-gradient(135deg, #8A2BE2 0%, #9370DB 50%, #6A0DAD 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow-x: hidden;
-            color: #6d3b47;
+            color: #FFF;
             padding: 20px;
             text-align: center;
         }
@@ -29,41 +29,65 @@
         .container {
             max-width: 600px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
             border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             padding: 30px;
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
-        .heart {
+        .glitter {
             position: absolute;
-            font-size: 20px;
-            opacity: 0.7;
-            color: #ff6b6b;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #FFF;
+            opacity: 0;
             z-index: 0;
-            animation: float 6s ease-in-out infinite;
+            animation: glitter 5s linear infinite;
         }
         
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(20deg); }
+        @keyframes glitter {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(50px) rotate(360deg);
+                opacity: 0;
+            }
         }
         
         h1 {
-            color: #e84393;
+            color: #FFD700;
             margin-bottom: 20px;
             font-size: 2.8rem;
             position: relative;
             z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
         
         .name {
             font-size: 3.5rem;
-            color: #e84393;
+            color: #FFD700;
             margin: 20px 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700;
+            }
+            to {
+                text-shadow: 0 0 15px #FFD700, 0 0 20px #FFD700, 0 0 25px #FFD700;
+            }
         }
         
         .message {
@@ -75,20 +99,25 @@
         }
         
         .confession {
-            background: rgba(252, 228, 236, 0.5);
+            background: rgba(255, 255, 255, 0.1);
             padding: 25px;
             border-radius: 15px;
             margin: 25px 0;
             line-height: 1.8;
-            border: 2px dashed #e84393;
+            border: 2px solid rgba(255, 255, 255, 0.3);
             position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .confession:hover {
+            transform: scale(1.02);
+            background: rgba(255, 255, 255, 0.2);
         }
         
         .confession:before {
             content: '"';
             font-size: 5rem;
-            color: #e84393;
-            opacity: 0.3;
+            color: rgba(255, 255, 255, 0.2);
             position: absolute;
             top: 10px;
             right: 20px;
@@ -97,13 +126,14 @@
         .footer {
             margin-top: 30px;
             font-size: 1.1rem;
-            color: #888;
+            color: rgba(255, 255, 255, 0.8);
         }
         
         .special {
-            color: #e84393;
+            color: #FFD700;
             font-weight: bold;
             font-size: 1.2em;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
         }
         
         .hearts-container {
@@ -114,9 +144,17 @@
         
         .pulse-heart {
             font-size: 2.5rem;
-            color: #ff6b6b;
+            color: #FF69B4;
             animation: pulse 1.5s infinite;
             margin: 0 10px;
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.7);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .pulse-heart:hover {
+            transform: scale(1.5);
+            color: #FF1493;
         }
         
         @keyframes pulse {
@@ -129,19 +167,90 @@
             display: inline-block;
             margin-top: 20px;
             padding: 12px 30px;
-            background: linear-gradient(45deg, #e84393, #fd79a8);
+            background: linear-gradient(45deg, #9B30FF, #6A0DAD);
             color: white;
             border: none;
             border-radius: 50px;
             font-size: 1.2rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            z-index: 0;
+        }
+        
+        .btn:hover:before {
+            left: 50%;
         }
         
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .fireworks {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 2;
+        }
+        
+        @keyframes firework {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--x), var(--y));
+                opacity: 0;
+            }
+        }
+        
+        .floating-text {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.2rem;
+            opacity: 0;
+            animation: floatText 15s linear infinite;
+            z-index: 0;
+        }
+        
+        @keyframes floatText {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
         }
         
         @media (max-width: 600px) {
@@ -184,9 +293,9 @@
         </div>
         
         <div class="hearts-container">
-            <div class="pulse-heart"><i class="fas fa-heart"></i></div>
-            <div class="pulse-heart"><i class="fas fa-heart"></i></div>
-            <div class="pulse-heart"><i class="fas fa-heart"></i></div>
+            <div class="pulse-heart" onclick="createFireworks(event)"><i class="fas fa-heart"></i></div>
+            <div class="pulse-heart" onclick="createFireworks(event)"><i class="fas fa-heart"></i></div>
+            <div class="pulse-heart" onclick="createFireworks(event)"><i class="fas fa-heart"></i></div>
         </div>
         
         <div class="message">
@@ -195,7 +304,7 @@
         </div>
         
         <button class="btn" onclick="showMessage()">
-            <i class="fas fa-gift"></i> اضغطي هنا
+            <span><i class="fas fa-gift"></i> اضغطي هنا</span>
         </button>
         
         <div class="footer">
@@ -204,21 +313,73 @@
     </div>
 
     <script>
-        // إنشاء القلوب العائمة
-        function createHearts() {
+        // إنشاء اللمعان
+        function createGlitter() {
             const container = document.querySelector('.container');
-            const heartCount = 15;
+            const glitterCount = 30;
             
-            for (let i = 0; i < heartCount; i++) {
-                const heart = document.createElement('div');
-                heart.classList.add('heart');
-                heart.innerHTML = '❤';
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.top = Math.random() * 100 + '%';
-                heart.style.animationDelay = Math.random() * 5 + 's';
-                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-                container.appendChild(heart);
+            for (let i = 0; i < glitterCount; i++) {
+                const glitter = document.createElement('div');
+                glitter.classList.add('glitter');
+                glitter.style.left = Math.random() * 100 + '%';
+                glitter.style.top = Math.random() * 100 + '%';
+                glitter.style.animationDelay = Math.random() * 5 + 's';
+                glitter.style.width = glitter.style.height = (Math.random() * 6 + 4) + 'px';
+                glitter.style.background = getRandomColor();
+                container.appendChild(glitter);
             }
+        }
+        
+        // إنشاء الألعاب النارية
+        function createFireworks(e) {
+            const x = e.clientX;
+            const y = e.clientY;
+            
+            for (let i = 0; i < 30; i++) {
+                const firework = document.createElement('div');
+                firework.classList.add('fireworks');
+                firework.style.left = x + 'px';
+                firework.style.top = y + 'px';
+                firework.style.background = getRandomColor();
+                firework.style.setProperty('--x', (Math.random() - 0.5) * 300 + 'px');
+                firework.style.setProperty('--y', (Math.random() - 0.5) * 300 + 'px');
+                firework.style.animation = `firework ${Math.random() * 1 + 0.5}s ease-out forwards`;
+                document.body.appendChild(firework);
+                
+                setTimeout(() => {
+                    firework.remove();
+                }, 1000);
+            }
+        }
+        
+        // إنشاء النصوص العائمة
+        function createFloatingText() {
+            const texts = ["حب", "نبأ", "رومانسية", "غزل", "إعجاب", "هيام", "وله", "شغف"];
+            
+            texts.forEach((text, index) => {
+                const floatingText = document.createElement('div');
+                floatingText.classList.add('floating-text');
+                floatingText.textContent = text;
+                floatingText.style.left = Math.random() * 100 + '%';
+                floatingText.style.animationDelay = index * 2 + 's';
+                floatingText.style.color = getRandomColor();
+                document.body.appendChild(floatingText);
+                
+                setTimeout(() => {
+                    floatingText.remove();
+                }, 15000);
+            });
+            
+            setTimeout(createFloatingText, 16000);
+        }
+        
+        // الحصول على لون عشوائي
+        function getRandomColor() {
+            const colors = [
+                '#FF69B4', '#FFD700', '#9370DB', '#00BFFF', '#FF6347', 
+                '#7FFF00', '#FF1493', '#00FA9A', '#8A2BE2', '#FF00FF'
+            ];
+            return colors[Math.floor(Math.random() * colors.length)];
         }
         
         // تأثير كتابة الاسم
@@ -240,13 +401,34 @@
         
         // عرض رسالة خاصة
         function showMessage() {
-            alert("نبأ الغالية،\n\nشكراً لأنكِ موجودة في حياتي\nوأتمنى أن أستحق مكاناً في حياتكِ\n\nمع كل الحب ❤️");
+            // إنشاء ألعاب نارية عند النقر على الزر
+            const btn = document.querySelector('.btn');
+            const rect = btn.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+            
+            const e = {
+                clientX: x,
+                clientY: y
+            };
+            createFireworks(e);
+            
+            // عرض الرسالة
+            setTimeout(() => {
+                alert("نبأ الغالية،\n\nشكراً لأنكِ موجودة في حياتي\nوأتمنى أن أستحق مكاناً في حياتكِ\n\nمع كل الحب ❤️");
+            }, 800);
         }
         
         // تهيئة الصفحة عند التحميل
         window.onload = function() {
-            createHearts();
+            createGlitter();
             setTimeout(typeWriter, 1000);
+            createFloatingText();
+            
+            // جعل القلوب قابلة للنقر
+            document.querySelectorAll('.pulse-heart').forEach(heart => {
+                heart.addEventListener('click', createFireworks);
+            });
         };
     </script>
 </body>
